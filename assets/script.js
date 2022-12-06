@@ -8,7 +8,7 @@ var cityLat = 0;
 
 //function to grab weather info if given city name
 function city2Coords(cityName){
-    var urlCity2Coords = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + key;
+    var urlCity2Coords = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + key;
 
 //get information from url
 fetch(urlCity2Coords)
