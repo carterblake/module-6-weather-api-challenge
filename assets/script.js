@@ -30,17 +30,41 @@ fetch(urlCity2Coords)
         let cityLat = data[0].lat;
         console.log(cityLat);
 
-      });
+        var urlGetWeather = "https://api.openweathermap.org/data/2.5/forecast?lat=" + cityLat + "&lon=" + cityLon + "&units=imperial&appid=" + key;
+        console.log(urlGetWeather);
 
-//set information to variables
+    fetch(urlGetWeather)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data.list[0].main.temp);
+        document.getElementById("temperature").textContent = data.list[0].main.temp + " degrees fahrenheit";
+
+        console.log(data.list[0].wind.speed);
+        document.getElementById("wind").textContent = data.list[0].wind.speed + " mph";
+
+        console.log(data.list[0].main.humidity);
+        document.getElementById("humidity").textContent = data.list[0].main.humidity + "%";
+
+        console.log(data.list[0].dt_txt)
+        document.getElementById("date").textContent = data.list[0].dt_txt;
+      })
+
+      })
 
 };
 
 
-//call function with user input
-console.log(city2Coords("wyoming"));
-//let testDisplay = document.getElementById("test-display");
-//testDisplay.textContent = resultCity;
-console.log(urlCity2Coords);
+var searchButton = document.getElementById("search-button");
 
-//display information
+searchButton.addEventListener("click", function() {
+
+    //var inputCity = document.getElementById("search-site");
+    var inputCity = prompt("please type a city");
+    if (city2Coords(inputCity) != 0) {
+        document.getElementById("test-display").textContent = "please enter a valid city";
+    }
+
+});
+
